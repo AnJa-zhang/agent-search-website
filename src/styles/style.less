@@ -1,0 +1,111 @@
+
+@charset utf-8;
+@import '_variables.less';
+@import 'fonticon.css';
+
+html{
+	font-size: 14px;
+	font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body{
+	font-size: 62.5%;
+	text-align: center;
+	margin: 0;
+}
+
+.hero{
+	margin: 0 auto;
+	background:	url('/images/hero.jpg'); 
+	background-size: cover;
+	color: @text-light-color;
+
+	header{
+		clear: both;
+		overflow: hidden;
+		margin-bottom: 7rem;
+		img{
+			width: 8rem;
+			height: 2rem;
+			float: left;
+		}
+		ul{
+			float: right;
+			li{
+				list-style-type: none;
+				float: left;
+				margin: 0.5rem;
+				padding: 1rem;
+				border: 1px solid transparent;
+				border-radius: 2px;
+
+				&:last-child{
+					border:1px solid @text-light-color;
+				}
+			}
+		}	
+	} 
+	h1{	
+		font-size: 3rem;
+		padding: 1rem 0.5rem 0;
+		font-weight: bold;				
+	}
+
+	h2{	
+		font-size:	1.5rem;	
+		color: #d9dada;			
+	}
+
+	form{
+		padding: 3rem 0 8rem 0;
+
+		input[type='text']{
+			padding: 1rem;
+			border: 0;
+			width: 18rem;
+			border-radius: 2px 0 0 2px;
+			background: #FFF;
+			opacity: .3;
+		}
+
+		input[type='button']{
+			color: @text-light-color;
+			padding: 1rem;
+			border: 0;
+			width: 6rem;
+			border-radius: 2px 0 0 2px;
+			background: @light-green;
+		}
+	}
+}
+
+.numbers{
+	width: 80%;
+	margin: 0 auto;
+	ul{
+		position: relative;
+		top: -3rem;
+		background: @bg-color;
+		clear: both;
+		overflow: hidden;
+		li{
+			width: 25%;
+			float: left;
+			box-sizing: border-box;
+			border-top: 1px solid @secondy-text-color;
+			border-bottom: 1px solid @secondy-text-color;
+			border-left: 1px solid @secondy-text-color;
+
+			&:last-child{
+				border-right: 1px solid @secondy-text-color;
+			}
+			h2{
+				font-size: 2rem;
+				padding: 2rem 0;
+			}
+			h3{
+				padding: 0 0 1rem 0;
+			}
+		}
+	}
+}

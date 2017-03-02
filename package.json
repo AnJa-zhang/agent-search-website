@@ -37,6 +37,7 @@
     "gulp-notify": "^3.0.0",
     "gulp-uglify": "^2.0.1",
     "jshint": "^2.9.4",
+    "less-plugin-clean-css": "^1.5.1",
     "path": "^0.12.7"
   }
 }

@@ -1,69 +1,100 @@
-/* line 5, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-}
-
-/* line 22, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+@charset utf-8;
+/* animation defination */
+/* utils defination */
+@import 'fonticon.css';
 html {
-  line-height: 1;
+  font-size: 14px;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-/* line 24, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-ol, ul {
-  list-style: none;
-}
-
-/* line 26, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* line 28, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-/* line 30, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-q, blockquote {
-  quotes: none;
-}
-/* line 103, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-q:before, q:after, blockquote:before, blockquote:after {
-  content: "";
-  content: none;
-}
-
-/* line 32, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-a img {
-  border: none;
-}
-
-/* line 116, ../../../../.rvm/gems/ruby-1.9.3-p545/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
-  display: block;
-}
-
-/* line 4, ../sass/style.scss */
 body {
   font-size: 62.5%;
+  text-align: center;
+  margin: 0;
+}
+.hero {
+  margin: 0 auto;
+  background: url('/images/hero.jpg');
+  background-size: cover;
+  color: #FFF;
+}
+.hero header {
+  clear: both;
+  overflow: hidden;
+  margin-bottom: 7rem;
+}
+.hero header img {
+  width: 8rem;
+  height: 2rem;
+  float: left;
+}
+.hero header ul {
+  float: right;
+}
+.hero header ul li {
+  list-style-type: none;
+  float: left;
+  margin: 0.5rem;
+  padding: 1rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.hero header ul li:last-child {
+  border: 1px solid #FFF;
+}
+.hero h1 {
+  font-size: 3rem;
+  padding: 1rem 0.5rem 0;
+  font-weight: bold;
+}
+.hero h2 {
+  font-size: 1.5rem;
+  color: #d9dada;
+}
+.hero form {
+  padding: 3rem 0 8rem 0;
+}
+.hero form input[type='text'] {
+  padding: 1rem;
+  border: 0;
+  width: 18rem;
+  border-radius: 2px 0 0 2px;
+  background: #FFF;
+  opacity: .3;
+}
+.hero form input[type='button'] {
+  color: #FFF;
+  padding: 1rem;
+  border: 0;
+  width: 6rem;
+  border-radius: 2px 0 0 2px;
+  background: #4ac386;
+}
+.numbers {
+  width: 80%;
+  margin: 0 auto;
+}
+.numbers ul {
+  position: relative;
+  top: -3rem;
+  background: #efefef;
+  clear: both;
+  overflow: hidden;
+}
+.numbers ul li {
+  width: 25%;
+  float: left;
+  box-sizing: border-box;
+  border-top: 1px solid #D9DADA;
+  border-bottom: 1px solid #D9DADA;
+  border-left: 1px solid #D9DADA;
+}
+.numbers ul li:last-child {
+  border-right: 1px solid #D9DADA;
+}
+.numbers ul li h2 {
+  font-size: 2rem;
+  padding: 2rem 0;
+}
+.numbers ul li h3 {
+  padding: 0 0 1rem 0;
 }

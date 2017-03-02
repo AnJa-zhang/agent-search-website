@@ -19,11 +19,12 @@ var gulp = require('gulp'),
 gulp.task('styles', function() { 
   return gulp.src('src/styles/*.less')
     .pipe(less())
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(minifycss())
     .pipe(gulp.dest('dist/styles'))
+    .pipe(connect.reload())
     .pipe(notify({ message: 'Styles task complete' }));
 });
  
@@ -37,21 +38,24 @@ gulp.task('scripts', function() {
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
     .pipe(gulp.dest('dist/scripts'))
+    .pipe(connect.reload())
     .pipe(notify({ message: 'Scripts task complete' }));
 });
  
 // 图片
 gulp.task('images', function() { 
   return gulp.src('src/images/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(cache(imagemin()))
     .pipe(gulp.dest('dist/images'))
+    .pipe(connect.reload())
     .pipe(notify({ message: 'Images task complete' }));
 });
 
 //  移动html
 gulp.task('html', function(){
-  return gulp.src(path.src + "*.html")
-    .pipe(gulp.dest(path.build))
+  return gulp.src('src/*.html')
+    .pipe(gulp.dest('dist/'))
+    .pipe(connect.reload())
     .pipe(notify({message : 'Html task complete'}))
 })
 
@@ -62,7 +66,7 @@ gulp.task('clean', function() {
 });
  
 // 预设任务
-gulp.task('default', ['watch', 'connect']);
+gulp.task('default', ['connect', 'watch']);
 
 //构建
 gulp.task('build', ['clean'], function(){
@@ -72,35 +76,28 @@ gulp.task('build', ['clean'], function(){
 //服务器
 gulp.task('connect', function() {
     connect.server({
-      root: 'src',
+      root: 'dist',
       port: 9999,
       livereload: true
     })
 })
 
-//服务器重载
-gulp.task('reload-dev',['scripts','styles','images'],function() {
-    gulp.src('src/**/*.*')
-      .pipe(connect.reload());
-});
-
- 
 // 看守
 gulp.task('watch', function() {
   
   //livereload.listen();
   
-  // 看守所有.scss档
-  //gulp.watch('src/styles/**/*.scss', ['styles']);
+  // 看守所有.less档
+  gulp.watch('src/styles/*.less', ['styles']);
  
   // 看守所有.js档
-  //gulp.watch('src/scripts/**/*.js', ['scripts']);
+  gulp.watch('src/scripts/*.js', ['scripts']);
  
   // 看守所有图片档
-  //gulp.watch('src/images/**/*', ['images']);
+  gulp.watch('src/images/*', ['images']);
 
-    // 看守所有文档变化
-  gulp.watch('src/**/*.*',['reload-dev']);
+  // 看守所有文档变化
+  gulp.watch('src/*.html',['html']);
  
   // 建立即时重整伺服器
   // var server = livereload();
