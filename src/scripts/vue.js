@@ -1,6 +1,3 @@
-$(document).ready(function() {
-	new WOW().init();
-});
 /*!
  * Vue.js v2.2.0
  * (c) 2014-2017 Evan You

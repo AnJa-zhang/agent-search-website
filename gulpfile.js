@@ -16,7 +16,7 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload');
  
 // 样式
-gulp.task('styles', function() { 
+gulp.task('build-styles', function() { 
   return gulp.src('src/styles/*.less')
     .pipe(less())
     //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
@@ -27,9 +27,18 @@ gulp.task('styles', function() {
     .pipe(connect.reload())
     .pipe(notify({ message: 'Styles task complete' }));
 });
+
+//src内编译less
+gulp.task('styles', function() { 
+  return gulp.src('src/styles/*.less')
+    .pipe(less())
+    //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(gulp.dest('src/styles'))
+    .pipe(connect.reload())
+});
  
 // 脚本
-gulp.task('scripts', function() { 
+gulp.task('build-scripts', function() { 
   return gulp.src('src/scripts/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
@@ -41,9 +50,17 @@ gulp.task('scripts', function() {
     .pipe(connect.reload())
     .pipe(notify({ message: 'Scripts task complete' }));
 });
+
+//src内刷新页面
+gulp.task('scripts', function() { 
+  return gulp.src('src/scripts/*.less')
+    .pipe(gulp.dest('src/scripts'))
+    .pipe(connect.reload())
+});
+
  
 // 图片
-gulp.task('images', function() { 
+gulp.task('build-images', function() { 
   return gulp.src('src/images/**/*')
     .pipe(cache(imagemin()))
     .pipe(gulp.dest('dist/images'))
@@ -52,7 +69,7 @@ gulp.task('images', function() {
 });
 
 //  移动html
-gulp.task('html', function(){
+gulp.task('build-html', function(){
   return gulp.src('src/*.html')
     .pipe(gulp.dest('dist/'))
     .pipe(connect.reload())
@@ -70,13 +87,13 @@ gulp.task('default', ['connect', 'watch']);
 
 //构建
 gulp.task('build', ['clean'], function(){
-    gulp.start('styles', 'scripts', 'images', 'html');
+    gulp.start('build-styles', 'build-scripts', 'build-images', 'build-html');
 })
 
 //服务器
 gulp.task('connect', function() {
     connect.server({
-      root: 'dist',
+      root: 'src',
       port: 9999,
       livereload: true
     })
@@ -92,12 +109,9 @@ gulp.task('watch', function() {
  
   // 看守所有.js档
   gulp.watch('src/scripts/*.js', ['scripts']);
- 
-  // 看守所有图片档
-  gulp.watch('src/images/*', ['images']);
 
   // 看守所有文档变化
-  gulp.watch('src/*.html',['html']);
+  gulp.watch('src/*.html',['build-html']);
  
   // 建立即时重整伺服器
   // var server = livereload();

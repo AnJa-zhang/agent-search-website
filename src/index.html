@@ -2,72 +2,59 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="styles/normalize.css">
-	<link rel="stylesheet" type="text/css" href="styles/fonticon.css">
-	<link rel="stylesheet" type="text/css" href="styles/font-woff.css">
-	<link rel="stylesheet" type="text/css" href="styles/style.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<script type="text/javascript" src='scripts/vue.js'></script>
 </head>
 <body>
-	<section class="hero">
-		<header>
-			<img src="images/logo.png" alt="logo">
-			<ul>
-				<li>agents</li>
-				<li>login</li>
-				<li>signup</li>
-			</ul>
-		</header>
-		<h1>Relax,Finding An Agent Just	Got	Easier.</h1>
-		<h2>Receive	proposals from best	agents for free</h2>
-		<form action="">
-			<input type="text" placeholder="enter a suburb" />
-			<input type="button" value="search" />
-		</form>
-	</section>
-	<section class="numbers">
-		<ul>
-			<li class="number">
-				<h2>2,000</h2>
-				<h3>Agents</h3>
+<section class="task-page">
+	<div id="menu-area">
+		<div class="container">
+			<span class="prev-day"></span>
+			<span class="date-display">{{ message }}</span>
+			<span class="bills"></span>
+			<span class="next-day"></span>
+		</div>
+	</div>
+	<div id="task-area">
+		<ul id="task-area-wrapper">
+			<li class="task" v-for="(item, index) of items" v-on:delete="itmes.splice(index, 1)">
+				<span class="check-button"><input type="checkbox" name="check" v-model="item.done"></span>
+				<span class="task-content" v-bind:class="{ finished: item.done }"><input type="text" name="content" v-on:keyup.delete="removetask(index)" v-bind:title="item.content" v-bind:value="item.content" v-model="item.content"></span>
 			</li>
-			<li class="number">
-				<h2>1,723,000</h2>
-				<h3>Transactions</h3>
-			</li>
-			<li class="number">
-				<h2>17,444</h2>
-				<h3>Agenceies</h3>
-			</li>
-			<li class="number">
-				<h2>10,200</h2>
-				<h3>Suburbs</h3>
+			<li class="add-task">
+				<span class="add-button" v-on:click="newtask">···</span>
 			</li>
 		</ul>
-	</section>
-	<section class="how-it-works">
-		<h2>How It Works</h2>
-		<ul>
-			<li>
-				<div class="details">
-					<span class="number">1</span>
-					<i class="icon-list"></i>
-					<h3>Compare</h3>
-					<p>saiuhd dha ddada ffgb jhythth j ykukikojj  grgr.</p>
-				</div>
-				<div class="details">
-					<span class="number">2</span>
-					<i class="icon-pencil"></i>
-					<h3>Receive the  proposal</h3>
-					<p>cscbjsck jidoas dahdoef lkxs ccdhsf dsd.</p>
-				</div>
-				<div class="details">
-					<span class="number">3</span>
-					<i class="icon-users"></i>
-					<h3>sell with the best</h3>
-					<p>xxsoaofo ksdad defe adsd ffe klaoda.</p>
-				</div>
-			</li>
-		</ul>
-	</section>
+	</div>
+</section>
 </body>
+<script type="text/javascript">
+	var date_display = new Vue({
+		el:'.date-display',
+		data:{
+			message: (new Date()).toLocaleDateString()
+		}
+	})
+
+	var task_content = new Vue({
+		el:'#task-area-wrapper',
+		data:{
+			items:[
+				{content:'Task1',done:false},
+				{content:'Task2',done:false},
+				{content:'Task3',done:false}
+			]
+		},
+		methods:{
+			newtask: function() {
+				this.items.push({content:''})
+			},
+			removetask: function(index) {
+				if(window.event.target.value === ''){
+					this.items.splice(index, 1)
+				}
+			}
+		}
+	})
+</script>
 </html>
