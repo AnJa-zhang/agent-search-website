@@ -1,11 +1,14 @@
 var path = require('path')
 var webpack = require('webpack')
 
+var publicPath = 'http://localhost:4000/';
+var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
+
 module.exports = {
   entry: './src/client/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    path: path.resolve(__dirname, 'src/server/public/javascripts/'),
+    publicPath: '/javascripts/',
     filename: 'build.js'
   },
   module: {
