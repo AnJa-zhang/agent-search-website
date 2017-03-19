@@ -23,9 +23,7 @@
             v-model="item.content">
           </span>
         </li>
-        <li class="add-task">
-          <span class="add-button" v-on:click="newtask">add</span>
-        </li>
+        <span class="add-button" v-on:click="newtask">ADD</span>
       </ul>
     </div>
   </section>
@@ -102,11 +100,10 @@ body {
   margin: 0;
 }
 #task-page {
-  max-width: 20rem;
-
-  margin: 0 auto;
-  padding: 0 1px;
-  background: #1c6588;
+  max-width: 22rem;
+  margin: 10px auto;
+  border: 1px solid #a7a7a7;
+  border-radius: 8px 8px 0 0;
 }
 #task-page ul {
   list-style-type: none;
@@ -127,6 +124,7 @@ body {
   vertical-align: middle;
 }
 #menu-area .container {
+  background: #FFC107;
   padding: 3px;
   font-size: 1.2rem;
   height: 3rem;
@@ -136,7 +134,7 @@ body {
   width: 0;
   height: 0;
   transform: rotate(-45deg);
-  border-width: 10px;
+  border-width: 8px;
   border-color: #fbfbfb rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #f1f1f1;
   border-style: solid;
 }
@@ -144,7 +142,7 @@ body {
   width: 0;
   height: 0;
   transform: rotate(135deg);
-  border-width: 10px;
+  border-width: 8px;
   border-color: #fbfbfb rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #f1f1f1;
   border-style: solid;
 }
@@ -155,15 +153,14 @@ body {
   line-height: 3rem;
   width: 8rem;
   height: 2.6rem;
-  border: 1px solid #FFF;
-  border-radius: 3px;
+  margin: 0 10px;
 }
 #menu-area .container span {
   display: inline-block;
 }
 #task-area {
   background: #FFF;
-  height: 28rem;
+  height: 35rem;
   overflow-y: scroll;
 }
 #task-area ul li {
@@ -208,12 +205,18 @@ body {
   width: 90%;
   float: right;
 }
-#task-area ul li .add-button {
-  width: 100%;
-  font-size: 1.3rem;
-  line-height: 1.3rem;
+#task-area .add-button {
+  width: 5rem;
+  height: 2.2rem;
+  margin-top: 2rem 0;
+  border: 1px solid #b3b0b0;
+  border-radius: 3px;
+  color: #ffc107;
+  line-height: 2.2rem;
+  display: inline-block;
 }
-#task-area ul li .add-button:hover {
+#task-area .add-button:hover {
+  background: #eee;
   cursor: pointer;
 }
 #task-area ul li .finished input {
