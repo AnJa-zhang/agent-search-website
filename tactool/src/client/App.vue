@@ -2,19 +2,29 @@
   <section id="task-page">
     <div id="menu-area">
       <div class="container">
-        <a class="prev-day" href="/prev"></a>
+        <a class="prev-day" href="javascript:;" v-on:click="switchdate(-1)"></a>
         <a class="date-display" href="/home">{{ date }}</a>
-        <a class="next-day" href="/next"></a>
+        <a class="next-day" href="javascript:;" v-on:click="switchdate(1)"></a>
       </div>
     </div>
     <div id="task-area">
       <ul id="task-area-wrapper">
-        <li class="task" v-for="(item, index) of items" v-on:delete="itmes.splice(index, 1)">
-          <span class="check-button"><input type="checkbox" name="check" v-model="item.done"></span>
-          <span class="task-content" v-bind:class="{ finished: item.done }"><input type="text" name="content" v-on:keyup.delete="removetask(index)" v-bind:title="item.content" v-bind:value="item.content" v-model="item.content"></span>
+        <li class="task" 
+        v-for="(item, index) of todos" 
+        v-on:delete="todos.splice(index, 1)">
+          <span class="check-button">
+            <input type="checkbox" name="check" v-model="item.done">
+          </span>
+          <span class="task-content" v-bind:class="{ finished: item.done }">
+            <input type="text" name="content" 
+            v-on:keyup.delete="removetask(index)" 
+            v-bind:title="item.content" 
+            v-bind:value="item.content" 
+            v-model="item.content">
+          </span>
         </li>
         <li class="add-task">
-          <span class="add-button" v-on:click="newtask">···</span>
+          <span class="add-button" v-on:click="newtask">add</span>
         </li>
       </ul>
     </div>
@@ -22,30 +32,59 @@
 </template>
 
 <script>
+var STORAGE_KEY = (new Date()).toLocaleDateString(),
+    date = new Date()
+var todoStorage = {
+  fetch: function (FETCH_KEY) {
+    var todos = JSON.parse(localStorage.getItem(FETCH_KEY) || '[]')
+    console.log(FETCH_KEY + 'fetch')
+    todos.forEach(function (todo, index) {
+      todo.id = index;
+    })
+    todoStorage.uid = todos.length
+    return todos
+  },
+  save: function (todos) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+    console.log(STORAGE_KEY + 'store')
+  }
+}
 export default {
   name: 'task-page',
   data () {
     return {
-      items:[
-        {content:'Task1',done:false},
-        {content:'Task2',done:false},
-        {content:'Task3',done:false},
-        {content:'Task4',done:false},
-        {content:'Task5',done:false}
-      ],
-      date:(new Date()).toLocaleDateString()
+      todos: todoStorage.fetch(STORAGE_KEY),
+      date: date.toLocaleDateString()
     }
   },
   methods:{
     newtask: function() {
-      this.items.push({content:''})
+      this.todos.push({content:'', done: false})
     },
     removetask: function(index) {
       if(window.event.target.value === ''){
-        this.items.splice(index, 1)
+        this.todos.splice(index, 1)
+      }
+    },
+    switchdate: function(number) {
+      date.setDate(date.getDate() + number);
+      this.date = date.toLocaleDateString();
+      STORAGE_KEY = this.date;
+    }
+  },
+  watch: {
+    todos: {
+      handler: function (todos) {
+        todoStorage.save(todos)
+      },
+      deep: true
+    },
+    date: {
+      handler: function(date) {
+        this.todos  = todoStorage.fetch(date)
       }
     }
-  }
+  },
 }
 </script>
 
@@ -64,9 +103,10 @@ body {
 }
 #task-page {
   max-width: 20rem;
+
   margin: 0 auto;
-  padding: 0 3px;
-  background: #f3c5cb;
+  padding: 0 1px;
+  background: #1c6588;
 }
 #task-page ul {
   list-style-type: none;
@@ -123,6 +163,8 @@ body {
 }
 #task-area {
   background: #FFF;
+  height: 28rem;
+  overflow-y: scroll;
 }
 #task-area ul li {
   float: left;
