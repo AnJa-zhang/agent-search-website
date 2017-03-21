@@ -208,7 +208,7 @@ body {
 #task-area .add-button {
   width: 5rem;
   height: 2.2rem;
-  margin-top: 2rem 0;
+  margin-top: 2rem;
   border: 1px solid #b3b0b0;
   border-radius: 3px;
   color: #ffc107;
